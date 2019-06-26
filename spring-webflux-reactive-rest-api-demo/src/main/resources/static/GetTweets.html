@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Tweet notification stream</title>
+   </head>
+   
+   <body>
+   
+   <script>
+      var eventSource = new EventSource('http://localhost:8080/stream/tweets');
+      
+      eventSource.onmessage = function (event) {
+      	console.log('message from server: ' + event.data);
+      	document.body.innerHTML += event.data + '<br>';
+      };
+	  
+	  eventSource.addEventListener('open', function(e) {
+		  console.log('Connection was opened.');
+		  document.body.innerHTML += '<br>' ;
+		}, false);
+		
+	  eventSource.addEventListener('error', function(e) {
+		  if (e.readyState == EventSource.CLOSED) {
+		    console.log('Connection was closed due to an error.');
+		  }
+      }, false);
+	 
+	  
+    </script>
+      
+   </body>
+</html>
