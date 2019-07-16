@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Tweet notification stream</title>
+   </head>
+   
+   <body>
+   <div id="connect-container" class="ui centered grid">
+   			<div class="row">
+                <textarea id="message" style="width: 350px" class="ui input"
+                    placeholder="Message to Echo"></textarea>
+            </div>
+   </div>
+            
+   <div class="events"></div>
+ 
+   <script>
+    var clientWebSocket = new WebSocket("ws://localhost:8080/event-emitter-echo");
+    clientWebSocket.onopen = function() {
+        console.log("clientWebSocket.onopen", clientWebSocket);
+        console.log("clientWebSocket.readyState", "websocketstatus");
+        clientWebSocket.send("event-me-from-browser");
+    }
+    clientWebSocket.onclose = function(error) {
+        console.log("clientWebSocket.onclose", clientWebSocket, error);
+        events("Closing connection");
+    }
+    clientWebSocket.onerror = function(error) {
+        console.log("clientWebSocket.onerror", clientWebSocket, error);
+        events("An error occured");
+    }
+    clientWebSocket.onmessage = function(error) {
+        console.log("clientWebSocket.onmessage", clientWebSocket, error);
+        events(error.data);
+    }
+    function events(responseEvent) {
+        document.querySelector(".events").innerHTML += responseEvent + "<br>";
+        var message = document.getElementById('message').value;
+        clientWebSocket.send(message);
+    }
+</script>
+      
+   </body>
+</html>

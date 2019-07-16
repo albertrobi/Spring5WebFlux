@@ -1,7 +1,6 @@
 package com.example.webfluxdemo;
 
 import java.net.URI;
-import java.time.Duration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,8 +26,7 @@ public class WebfluxDemoApplication {
 	            .thenMany(session.receive()
 	              .map(WebSocketMessage::getPayloadAsText)
 	              .log())
-	            	.then());
-	            	
+	            	.then());      	
 		
 	}
 }

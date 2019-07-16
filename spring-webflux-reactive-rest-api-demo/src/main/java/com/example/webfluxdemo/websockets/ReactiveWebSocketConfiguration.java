@@ -18,11 +18,16 @@ public class ReactiveWebSocketConfiguration {
     @Autowired
     @Qualifier("ReactiveWebSocketHandler")
     private WebSocketHandler webSocketHandler;
+    
+    @Autowired
+    @Qualifier("ReactiveWebSocketHandlerEcho")
+    private WebSocketHandler webSocketHandlerEcho;
 
     @Bean
     public HandlerMapping webSocketHandlerMapping() {
         Map<String, WebSocketHandler> map = new HashMap<>();
         map.put("/event-emitter", webSocketHandler);
+        map.put("/event-emitter-echo", webSocketHandlerEcho);
 
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setOrder(1);
