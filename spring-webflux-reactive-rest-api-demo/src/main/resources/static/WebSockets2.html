@@ -3,7 +3,7 @@
 <html>
    <head>
       <meta charset="utf-8">
-      <title>WebSockets stream</title>
+      <title>Tweet notification stream</title>
    </head>
    
    <body>
@@ -17,7 +17,7 @@
    <div class="events"></div>
  
    <script>
-    var clientWebSocket = new WebSocket("ws://localhost:8080/event-emitter");
+    var clientWebSocket = new WebSocket("ws://localhost:8080/stream/streamWebSocket");
     clientWebSocket.onopen = function() {
         console.log("clientWebSocket.onopen", clientWebSocket);
         console.log("clientWebSocket.readyState", "websocketstatus");
