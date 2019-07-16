@@ -70,7 +70,7 @@ public class TweetController {
     // The nice thing about Server-Sent Events is that they have a built in reconnection feature, when the client loses 
     // the connection he tries to reconnect to the server automatically. WebSocket does not have such a built in functionality.
     
-    //The second is for our application to push student information whenever it is added, we need to use 
+    //The second is for our application to push tweet information whenever it is added, we need to use 
     //MongoDB with the capped collection.
 
     //The reason is that by default, for each query, when the user has exhausted the data for that query,
@@ -82,6 +82,11 @@ public class TweetController {
     //When the capped collection is full, the new document will override the oldest document. 
     //For the tailable cursor, if you used the tail -f command in Linux, you can imagine that tailable cusor 
     //will keep retrieving document after the user has retrieved the result for the query.
+    
+    //Also, please note that tailable cursors may become dead, or invalid if the query initially returns no match. 
+    //In other words, even if new persisted documents match the filter query, the subscriber will not be able to receive them.
+    //This is a known limitation of MongoDB tailable cursors. We must ensure that there are matching documents 
+    //in the capped collection, before creating a tailable cursor.
     
     @CrossOrigin(allowedHeaders = "*",origins = "*")
     // Tweets are Sent to the client as Server Sent Events

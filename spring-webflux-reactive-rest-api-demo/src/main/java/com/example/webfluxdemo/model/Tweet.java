@@ -1,6 +1,7 @@
 package com.example.webfluxdemo.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Document(collection = "tweets")
 public class Tweet {
     @Id
+    @Indexed
     private String id;
 
     @NotBlank

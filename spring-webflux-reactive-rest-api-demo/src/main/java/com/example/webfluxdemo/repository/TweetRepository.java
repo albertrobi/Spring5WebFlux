@@ -17,4 +17,8 @@ public interface TweetRepository extends ReactiveMongoRepository<Tweet, String> 
 	 @Tailable
 	 Flux<Tweet> findByTextStartingWith(String text);
 	 
+	 // check why updates are not shown
+	 // check deletes are not 
+	 // - cannot remove from a capped collection: webflux_demo.tweets; nested exception is com.mongodb.MongoWriteException: cannot remove from a capped collection: webflux_demo.tweets
+	 
 }
