@@ -34,6 +34,13 @@ mvn spring-boot:run
 
 The server will start at <http://localhost:8080>.
 
+**3. Configure documents to support tailable property**
+
+Since we are using capped collections, we need to run from mongo shell the following command
+```bash
+db.runCommand({"convertToCapped": "tweets", size: 100000});
+```
+ 
 ## Exploring the Rest APIs
 
 The application defines following REST APIs
